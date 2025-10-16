@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from difflib import SequenceMatcher
-from models import Doctor, VerificationAttempt
+from app.models.doctor import Doctor, VerificationAttempt  # CHANGE: add app.
 
 async def verify_doctor(db: AsyncSession, user_id: str, reg_num: str, name: str, state: str, year: int):
     stmt = select(Doctor).where(

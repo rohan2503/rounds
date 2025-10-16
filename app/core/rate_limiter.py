@@ -1,19 +1,15 @@
 try:
     from redis import asyncio as aioredis
-except Exception:  # fallback for environments without redis lib
+except Exception:
     aioredis = None
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+from app.core.config import settings  # CHANGE: import settings
 
 async def init_redis():
     if aioredis is None:
         print("⚠️ Redis client not installed, rate limiting disabled")
         return None
     try:
-        return aioredis.from_url(REDIS_URL)
+        return aioredis.from_url(settings.REDIS_URL)  # CHANGE: use settings
     except Exception as e:
         print("⚠️ Redis not available, rate limiting disabled:", e)
         return None

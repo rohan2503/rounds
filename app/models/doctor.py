@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, Text, TIMESTAMP, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, TIMESTAMP, Boolean
 from sqlalchemy.sql import func
-from database import Base
+from app.database import Base  # CHANGE: add app.
 
 class Doctor(Base):
     __tablename__ = "doctors"
